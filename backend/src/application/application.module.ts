@@ -1,6 +1,8 @@
 import { Module, Provider } from '@nestjs/common';
 import { PrismaTeamRepository } from 'src/infra/repositories/team-repository';
-import { CreateTeamUsecase } from './usecase/create-team/create-team-usecase';
+import { CreateTeamUsecase } from './usecase/team/create-team-usecase';
+import { UpdateTeamUsecase } from './usecase/team/update-team-usecase';
+import { GetTeamUsecase } from './usecase/team/get-team-usecase';
 
 const repositories: Provider[] = [
   {
@@ -9,7 +11,11 @@ const repositories: Provider[] = [
   },
 ];
 
-const usecases: Provider[] = [CreateTeamUsecase];
+const usecases: Provider[] = [
+  CreateTeamUsecase,
+  UpdateTeamUsecase,
+  GetTeamUsecase,
+];
 
 @Module({
   providers: [...repositories, ...usecases],

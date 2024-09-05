@@ -19,4 +19,8 @@ export class Team {
       ...props,
     });
   }
+
+  static checkNameIsEqual(name: string, comparisonName: string): boolean {
+    return name === comparisonName;
+  }
 }

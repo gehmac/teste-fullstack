@@ -1,10 +1,10 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
-import { CreateTeamUsecase } from 'src/application/usecase/create-team/create-team-usecase';
+import { CreateTeamUsecase } from 'src/application/usecase/team/create-team-usecase';
 import { CreateTeamRequest } from './team-creation-controller-type';
 
 @Controller({
-  path: 'team',
   version: '*',
+  path: 'team',
 })
 export class TeamCreationController {
   constructor(

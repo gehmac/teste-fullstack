@@ -5,8 +5,14 @@ import { AppModule } from './app.module';
 
 let app: INestApplication;
 
+export function configureApp(appModule: INestApplication): void {
+  appModule.enableVersioning();
+}
+
 async function createAppModule(): Promise<NestExpressApplication> {
   const appModule = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  configureApp(appModule);
 
   return appModule;
 }

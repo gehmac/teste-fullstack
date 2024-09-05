@@ -15,20 +15,17 @@ export class PrismaTeamRepository {
     return Team.create({ ...team, _id: team.id });
   }
 
-  async findById(id: string): Promise<Team | null> {
+  async findById(id: string): Promise<Team> {
     const team = await prisma.team.findUnique({
       where: { id },
     });
-    return team ? Team.create({ ...team, _id: team.id }) : null;
+    return team ? Team.create({ ...team, _id: team.id }) : undefined;
   }
 
-  async update(entity: Team): Promise<Team> {
+  async update(id: string, name: string): Promise<Team> {
     const updatedTeam = await prisma.team.update({
-      where: { id: entity.props._id },
-      data: {
-        name: entity.props.name,
-        updatedAt: new Date(),
-      },
+      where: { id },
+      data: { name },
     });
     return Team.create({ ...updatedTeam, _id: updatedTeam.id });
   }
