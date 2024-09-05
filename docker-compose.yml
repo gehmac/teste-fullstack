@@ -27,5 +27,15 @@ services:
     command: >
       sh -c "npm run build && npx prisma migrate deploy && node dist/main"
 
+  frontend:
+    ports:
+      - "3030:3030"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    working_dir: /front
+    depends_on:
+      - backend
+
 volumes:
   postgres_data:
