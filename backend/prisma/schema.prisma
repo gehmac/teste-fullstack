@@ -10,10 +10,10 @@ datasource db {
 model Team {
   id        String   @id @default(uuid())
   name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-  @@map("teams") // mapeia para a tabela "teams"
+  @@map("teams")
 }
 
 // model User {
