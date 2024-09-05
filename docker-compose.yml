@@ -26,6 +26,8 @@ services:
       - "3000:3000"
     command: >
       sh -c "npm run build && npx prisma migrate deploy && node dist/main"
+    volumes:
+      - ./backend:/app
 
   frontend:
     ports:
@@ -36,6 +38,8 @@ services:
     working_dir: /front
     depends_on:
       - backend
+    volumes:
+      - ./frontend:/app
 
 volumes:
   postgres_data:

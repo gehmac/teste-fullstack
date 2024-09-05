@@ -15,7 +15,7 @@ export class PrismaTeamRepository {
     return Team.create({ ...team, _id: team.id });
   }
 
-  async findById(id: string): Promise<Team> {
+  async findById(id: string): Promise<Team | undefined> {
     const team = await prisma.team.findUnique({
       where: { id },
     });
