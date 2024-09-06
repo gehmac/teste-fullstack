@@ -8,19 +8,20 @@ datasource db {
 }
 
 model Team {
-  id        String   @id @default(uuid())
-  name      String
+  id         String   @id @default(uuid())
+  name       String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@map("teams")
 }
 
-// model User {
-//   id        Int      @default(autoincrement()) @id
-//   title     String
-//   content   String?
-//   published Boolean? @default(false)
-//   author    User?    @relation(fields: [authorId], references: [id])
-//   authorId  Int?
-// }
+model Player {
+  id         String   @id @default(uuid())
+  name       String
+  age        Int?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("Players")
+}

@@ -8,18 +8,18 @@ export class PrismaTeamRepository {
     const team = await prisma.team.create({
       data: {
         name: entity.props.name,
-        createdAt: entity.props.createdAt,
-        updatedAt: entity.props.updatedAt,
+        created_at: entity.props.createdAt,
+        updated_at: entity.props.updatedAt,
       },
     });
-    return Team.create({ ...team, _id: team.id });
+    return Team.create({ ...team, id: team.id });
   }
 
   async findById(id: string): Promise<Team | undefined> {
     const team = await prisma.team.findUnique({
       where: { id },
     });
-    return team ? Team.create({ ...team, _id: team.id }) : undefined;
+    return team ? Team.create({ ...team, id: team.id }) : undefined;
   }
 
   async update(id: string, name: string): Promise<Team> {
@@ -27,7 +27,7 @@ export class PrismaTeamRepository {
       where: { id },
       data: { name },
     });
-    return Team.create({ ...updatedTeam, _id: updatedTeam.id });
+    return Team.create({ ...updatedTeam, id: updatedTeam.id });
   }
 
   async delete(id: string): Promise<void> {
@@ -38,6 +38,6 @@ export class PrismaTeamRepository {
 
   async findAll(): Promise<Team[]> {
     const teams = await prisma.team.findMany();
-    return teams.map((team) => Team.create({ ...team, _id: team.id }));
+    return teams.map((team) => Team.create({ ...team, id: team.id }));
   }
 }
