@@ -18,7 +18,7 @@ export class CreateTeamUsecase implements Usecase<CreateTeamUsecaseProps> {
   async execute(props: CreateTeamUsecaseProps): Promise<void> {
     await this.prismaTeamRepository.create(
       Team.create({
-        _id: props.id,
+        id: props.id,
         name: props.name,
       }),
     );

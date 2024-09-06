@@ -18,34 +18,34 @@ export class PlayerModerationController {
     private readonly deletePlayerUsecase: DeletePlayerUsecase,
   ) {}
 
-  @Put('/:PlayerId/rename')
+  @Put('/:playerId/rename')
   async renamePlayer(
-    @Param('PlayerId') PlayerId: string,
+    @Param('playerId') playerId: string,
     @Body() body: RenamePlayerRequest,
   ): Promise<string> {
-    const Player = await this.getPlayerUsecase.execute(PlayerId);
+    const Player = await this.getPlayerUsecase.execute(playerId);
     if (!Player) {
-      throw new Error(`not found ${PlayerId}`);
+      throw new Error(`not found ${playerId}`);
     }
 
     if (Player.props.name === body.newName) {
       return 'success';
     }
     await this.updatePlayerUsecase.execute({
-      id: PlayerId,
+      id: playerId,
       name: body.newName,
     });
     return 'success';
   }
 
-  @Delete('/:PlayerId/delete')
-  async deletePlayer(@Param('PlayerId') PlayerId: string): Promise<string> {
-    const Player = await this.getPlayerUsecase.execute(PlayerId);
+  @Delete('/:playerId/delete')
+  async deletePlayer(@Param('playerId') playerId: string): Promise<string> {
+    const Player = await this.getPlayerUsecase.execute(playerId);
     if (!Player) {
       return 'success';
     }
 
-    await this.deletePlayerUsecase.execute(PlayerId);
+    await this.deletePlayerUsecase.execute(playerId);
     return 'success';
   }
 }
