@@ -15,17 +15,17 @@ export class PlayerInfoController {
     private readonly getAllPlayersUsecase: GetAllPlayersUsecase,
   ) {}
 
-  @Get('/:teamId/')
-  async getPlayer(@Param('teamId') teamId: string): Promise<PlayerProps> {
-    const result = await this.getPlayerUsecase.execute(teamId);
-
-    return result.props;
-  }
-
   @Get('all')
   async listOfPlayres(): Promise<PlayerProps[]> {
     const result = await this.getAllPlayersUsecase.execute();
 
     return result.map((it) => it.props);
+  }
+
+  @Get('/:teamId/')
+  async getPlayer(@Param('teamId') teamId: string): Promise<PlayerProps> {
+    const result = await this.getPlayerUsecase.execute(teamId);
+
+    return result.props;
   }
 }

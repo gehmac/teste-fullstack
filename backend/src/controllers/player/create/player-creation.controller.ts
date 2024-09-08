@@ -1,6 +1,6 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
-import { CreateTeamUsecase } from 'src/application/usecase/team/create-team-usecase';
 import { CreatePlayerRequest } from './player-creation-controller-type';
+import { CreatePlayerUsecase } from 'src/application/usecase/player/create-player-usecase';
 
 @Controller({
   version: '*',
@@ -8,13 +8,17 @@ import { CreatePlayerRequest } from './player-creation-controller-type';
 })
 export class PlayerCreationController {
   constructor(
-    @Inject(CreateTeamUsecase)
-    private readonly createTeamUsecase: CreateTeamUsecase,
+    @Inject(CreatePlayerUsecase)
+    private readonly createPLayerUsecase: CreatePlayerUsecase,
   ) {}
 
   @Post('create')
   async createTeams(@Body() body: CreatePlayerRequest): Promise<string> {
-    await this.createTeamUsecase.execute({ name: body.nameTeam });
+    await this.createPLayerUsecase.execute({
+      name: body.name,
+      age: body.age,
+      teamId: body.teamId,
+    });
     return 'success';
   }
 }

@@ -7,12 +7,22 @@ export class PrismaPlayerRepository {
   async create(entity: Player): Promise<Player> {
     const player = await prisma.player.create({
       data: {
+        id: entity.props.id,
         name: entity.props.name,
+        age: entity.props.age,
+        teamId: entity.props.teamId,
         created_at: entity.props.createdAt,
         updated_at: entity.props.updatedAt,
       },
     });
-    return Player.create({ ...player, id: player.id });
+    return Player.create({
+      id: player.id,
+      name: player.name,
+      age: player.age,
+      teamId: player.teamId,
+      createdAt: player.created_at,
+      updatedAt: player.updated_at,
+    });
   }
 
   async findById(id: string): Promise<undefined | Player> {
