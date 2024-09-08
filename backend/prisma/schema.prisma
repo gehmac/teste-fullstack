@@ -13,15 +13,20 @@ model Team {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
+  players Player[] @relation("TeamPlayers")
+
   @@map("teams")
 }
 
 model Player {
   id         String   @id @default(uuid())
   name       String
-  age        Int?
+  age        Int
+  teamId     String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  @@map("Players")
+  team Team @relation("TeamPlayers", fields: [teamId], references: [id])
+
+  @@map("players")
 }
