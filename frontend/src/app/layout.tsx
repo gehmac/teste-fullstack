@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import "./globals.css";
+import { Typography } from "@mui/material";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+// const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+//   weight: "100 900",
+// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,9 +26,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+    <html lang="pt-br">
+      <body className={`${geistSans.variable}`}>
+        <AppRouterCacheProvider>
+          <header style={{ backgroundColor: "#0C66EC", padding: "10px 20px" }}>
+            <Typography color="#FFFFFF" fontSize={'22px'}>Dashboard</Typography>
+          </header>
+          {children}
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
